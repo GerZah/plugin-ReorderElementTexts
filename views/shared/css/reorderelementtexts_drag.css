@@ -1,0 +1,13 @@
+ul#sortable {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: show;
+}
+
+ul#sortable li {
+  padding: 0.5em;
+  margin-bottom: 1em;
+  width: 80%;
+}

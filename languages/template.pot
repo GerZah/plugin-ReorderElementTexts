@@ -1,0 +1,71 @@
+# Translation for the Reorder Element Texts plugin for Omeka.
+# Copyright (C) 2015 Gero Zahn
+# This file is distributed under the same license as the Omeka package.
+# Gero Zahn <gero.zahn@upb.de>, 2015.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ReorderElementTexts\n"
+"Report-Msgid-Bugs-To: http://github.com/omeka/plugin-ReorderElementTexts/"
+"issues\n"
+"POT-Creation-Date: 2012-01-09 21:49-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Gero Zahn<gero.zahn@upb.de>\n"
+"Language-Team: en_US <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ReorderElementTextsPlugin.php:60 views/admin/index/reorder.php:30
+msgid "Reorder Inputs"
+msgstr ""
+
+#: controllers/IndexController.php:21 controllers/IndexController.php:92
+msgid "Please return to the referring page."
+msgstr ""
+
+#: controllers/IndexController.php:27
+msgid "No item ID specified."
+msgstr ""
+
+#: controllers/IndexController.php:28
+msgid "No element ID specified."
+msgstr ""
+
+#: controllers/IndexController.php:33
+msgid "Item not found."
+msgstr ""
+
+#: controllers/IndexController.php:40
+msgid "Specified elements not found in item."
+msgstr ""
+
+#: controllers/IndexController.php:94
+msgid "Mismatching number of elements."
+msgstr ""
+
+#: controllers/IndexController.php:128
+msgid "Reordering successful."
+msgstr ""
+
+#: controllers/IndexController.php:128
+msgid "Reordering failed."
+msgstr ""
+
+#: controllers/IndexController.php:132
+msgid "Back"
+msgstr ""
+
+#: views/admin/index/reorder.php:2 views/admin/index/update.php:2
+msgid "Reorder Text Elements"
+msgstr ""
+
+#: views/admin/index/reorder.php:12
+msgid "Please select new text element order."
+msgstr ""
+
+#: views/admin/index/reorder.php:13
+msgid "Simply drag the text elements with your mouse."
+msgstr ""
