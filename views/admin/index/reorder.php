@@ -9,7 +9,8 @@
 	  $elementId = intval($_GET["element"]);
 
     echo "<h3>$title</h3>";
-    echo "<h4>".__("Please select new text element order.")."</h3>";
+    echo "<h4>$elementTitle</h4>";
+    echo "<p><strong>".__("Please select new text element order.")."</strong></p>";
     echo "<p>".__("Simply drag the text elements with your mouse.")."</p>";
 
     $backUrl=url("items/show/".$itemId);
@@ -17,8 +18,10 @@
 
     echo "<ul id='sortable'>";
     foreach($elements as $element) {
+      $hasRefText = isset($element["refText"]);
+      $elementText = ( $hasRefText ? $element["refText"] : $element["text"] );
       echo "<li class='ui-state-default dragitems' data-id='".$element["id"]."'>".
-            $element["text"].
+            $elementText.
             "</li>";
     }
     echo "</ul>";

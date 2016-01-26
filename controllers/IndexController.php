@@ -15,6 +15,7 @@ class ReorderElementTexts_IndexController extends Omeka_Controller_AbstractActio
   public function checkItemElement() {
 		$elements = false;
     $title = "";
+    $elementTitle = "";
 		$output = "";
 
 		$returnLink = "<a href='javascript:window.history.back();'>" .
@@ -30,7 +31,9 @@ class ReorderElementTexts_IndexController extends Omeka_Controller_AbstractActio
 	  else {
 	    $db = get_db();
 	    $itemExists = $db->fetchOne("SELECT count(*) FROM $db->Items WHERE id = $itemId");
+      $elementTitle = $db->fetchOne("SELECT name FROM $db->Elements WHERE id = $elementId");
 	    if (!$itemExists) { $output .= __("Item not found.") . " " . $returnLink; }
+      else if (!$elementTitle) { $output .= __("Element not found.") . " " . $returnLink; }
 
 	    else {
 	      $sql = "SELECT * FROM $db->ElementTexts".
@@ -40,22 +43,34 @@ class ReorderElementTexts_IndexController extends Omeka_Controller_AbstractActio
 	      if (!$elements) { $output .= __("Specified elements not found in item.") . " " . $returnLink; }
         else {
           $title = __("Item")." #".$itemId;
-          $sql = "SELECT id FROM $db->Elements WHERE name='Title'";
-          $titleElement = $db->fetchOne($sql);
-          if ($titleElement) {
-            $sql = "SELECT text".
-                    " from $db->ElementTexts".
-                    " WHERE record_id=$itemId".
-                    " AND element_id=$titleElement".
-                    " LIMIT 1";
-            $titleVerb = $db->fetchOne($sql);
-            if ($titleVerb) { $title .= ": " . $titleVerb;}
+          $item = get_record_by_id('Item', $itemId);
+          $titleVerb = metadata($item, array('Dublin Core', 'Title'), array('no_filter' => true));
+          if ($titleVerb) { $title .= ': "' . $titleVerb . '"';}
+
+          $referenceElementsJson=get_option('item_references_select');
+          if (!$referenceElementsJson) { $referenceElementsJson="null"; }
+          $referenceElements = json_decode($referenceElementsJson,true);
+
+          if (in_array($elementId, $referenceElements)) {
+            foreach(array_keys($elements) as $idx) {
+              $itemId = intval($elements[$idx]["text"]);
+              $refText = "#".$elements[$idx]["text"];
+              if ($itemId) {
+                $item = get_record_by_id('Item', $itemId);
+                $refTitle = metadata($item, array('Dublin Core', 'Title'), array('no_filter' => true));
+                $refText = ($refTitle ? __("Reference").": ".$refTitle : "#" . $itemId );
+              }
+              $elements[$idx]["refText"] = $refText;
+            }
           }
+          // echo "<pre>" . print_r($elements,true) . "</pre>"; die();
         }
 			}
 		}
 
-		return array("elements" => $elements, "output" => $output, "title" => $title);
+    $result = array("elements" => $elements, "output" => $output, "title" => $title, "elementTitle" => $elementTitle);
+    // echo "<pre>" . print_r($result,true) . "</pre>"; die();
+		return $result;
 	}
 
   public function reorderAction() {
@@ -65,6 +80,7 @@ class ReorderElementTexts_IndexController extends Omeka_Controller_AbstractActio
     $this->view->elements = $data["elements"];
     $this->view->output = $data["output"];
     $this->view->title = $data["title"];
+    $this->view->elementTitle = $data["elementTitle"];
   }
 
   public function updateAction() {
@@ -73,6 +89,7 @@ class ReorderElementTexts_IndexController extends Omeka_Controller_AbstractActio
     $this->view->elements = $data["elements"];
     $this->view->output = $data["output"];
     $this->view->title = $data["title"];
+    $this->view->elementTitle = $data["elementTitle"];
 
     $elements = $data["elements"];
     $output = $data["output"];
@@ -131,6 +148,7 @@ class ReorderElementTexts_IndexController extends Omeka_Controller_AbstractActio
         $backUrl=url("items/show/".$itemId);
         $output .= "<p><a href='".$backUrl."' class='green button'>".__("Back")."</a></p>";
 
+        update_item($itemId);
       }
     }
 
