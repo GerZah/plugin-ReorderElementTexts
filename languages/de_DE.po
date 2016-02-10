@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the Omeka package.
 #
 # Translators:
-# Gero Zahn <gerozahn@campus.uni-paderborn.de>, 2015
+# Gero Zahn <gerozahn@campus.uni-paderborn.de>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: WeSa Omeka\n"
-"Report-Msgid-Bugs-To: http://github.com/omeka/plugin-ReorderElementTexts/issues\n"
+"Report-Msgid-Bugs-To: http://github.com/GerZah/plugin-ReorderElementTexts/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2015-12-14 16:33+0100\n"
+"PO-Revision-Date: 2016-02-10 16:31+0100\n"
 "Last-Translator: Gero Zahn <gerozahn@campus.uni-paderborn.de>\n"
 "Language-Team: German (Germany) (http://www.transifex.com/upb/wesa-omeka/language/de_DE/)\n"
 "MIME-Version: 1.0\n"
@@ -17,56 +17,60 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: de_DE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.8.7\n"
 
-#: ReorderElementTextsPlugin.php:60 views/admin/index/reorder.php:30
+#: ReorderElementTextsPlugin.php:60 views/admin/index/reorder.php:33
 msgid "Reorder Inputs"
 msgstr "Eingaben umsortieren"
 
-#: controllers/IndexController.php:21 controllers/IndexController.php:92
+#: controllers/IndexController.php:22 controllers/IndexController.php:109
 msgid "Please return to the referring page."
 msgstr "Bitte kehren Sie zur aufrufenden Seite zurück."
 
-#: controllers/IndexController.php:27
+#: controllers/IndexController.php:28
 msgid "No item ID specified."
 msgstr "Keine Objekt-ID spezifiziert."
 
-#: controllers/IndexController.php:28
+#: controllers/IndexController.php:29
 msgid "No element ID specified."
 msgstr "Keine Element-ID spezifiziert."
 
-#: controllers/IndexController.php:33
+#: controllers/IndexController.php:35
 msgid "Item not found."
 msgstr "Objekt nicht gefunden."
 
-#: controllers/IndexController.php:40
+#: controllers/IndexController.php:36
+msgid "Element not found."
+msgstr "Element nicht gefunden."
+
+#: controllers/IndexController.php:43
 msgid "Specified elements not found in item."
 msgstr "Spezifiziertes Element nicht im Objekt gefunden."
 
-#: controllers/IndexController.php:94
+#: controllers/IndexController.php:61
+msgid "Reference"
+msgstr "Referenz"
+
+#: controllers/IndexController.php:111
 msgid "Mismatching number of elements."
 msgstr "Unterschiedliche Element-Anzahl."
 
-#: controllers/IndexController.php:128
+#: controllers/IndexController.php:144
 msgid "Reordering successful."
 msgstr "Umsortieren erfolgreich."
 
-#: controllers/IndexController.php:128
+#: controllers/IndexController.php:147
 msgid "Reordering failed."
 msgstr "Umsortieren misslungen."
 
-#: controllers/IndexController.php:132
-msgid "Back"
-msgstr "Zurück"
-
-#: views/admin/index/reorder.php:2 views/admin/index/update.php:2
+#: views/admin/index/reorder.php:2
 msgid "Reorder Text Elements"
 msgstr "Text-Elemente umsortieren"
 
-#: views/admin/index/reorder.php:12
+#: views/admin/index/reorder.php:13
 msgid "Please select new text element order."
 msgstr "Bitte wählen Sie die neue Reihenfolge der Text-Elemente."
 
-#: views/admin/index/reorder.php:13
+#: views/admin/index/reorder.php:14
 msgid "Simply drag the text elements with your mouse."
 msgstr "Verschieben Sie die Text-Elemente einfach mit Ihrer Maus."

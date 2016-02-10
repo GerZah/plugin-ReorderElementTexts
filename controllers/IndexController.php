@@ -140,19 +140,18 @@ class ReorderElementTexts_IndexController extends Omeka_Controller_AbstractActio
           $locSuccess = ( $db->query($sql) );
           $success = ( ($success) AND ($locSuccess) ) ;
         }
-
-        $output .= "<p>".
-                    ( $success ? __("Reordering successful.") : __("Reordering failed.") ).
-                    "</p>";
-
-        $backUrl=url("items/show/".$itemId);
-        $output .= "<p><a href='".$backUrl."' class='green button'>".__("Back")."</a></p>";
+        if($success){
+          $this->_helper->flashMessenger(__('Reordering successful.'), 'success');
+        }
+        else{
+          $this->_helper->flashMessenger(__('Reordering failed.'), 'error');
+        }
+        $this->_helper->redirector($itemId, 'show' ,'items');
 
         update_item($itemId);
       }
     }
 
-    $this->view->output = $output;
   }
 
 }
