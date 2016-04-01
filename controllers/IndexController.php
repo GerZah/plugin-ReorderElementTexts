@@ -44,24 +44,26 @@ class ReorderElementTexts_IndexController extends Omeka_Controller_AbstractActio
         else {
           $title = __("Item")." #".$itemId;
           $item = get_record_by_id('Item', $itemId);
-          $titleVerb = metadata($item, array('Dublin Core', 'Title'), array('no_filter' => true));
+          $titleVerb = metadata($item, array('Dublin Core', 'Title'));
           if ($titleVerb) { $title .= ': "' . $titleVerb . '"';}
 
-          $referenceElementsJson=get_option('item_references_select');
-          if (!$referenceElementsJson) { $referenceElementsJson="null"; }
-          $referenceElements = json_decode($referenceElementsJson,true);
+          $sql="
+            SELECT es.name
+            FROM $db->ElementSets es
+            JOIN $db->Elements el
+            ON es.id = el.element_set_id
+            WHERE el.id = $elementId
+          ";
+          $elementSet = $db->fetchOne($sql);
 
-          if (in_array($elementId, $referenceElements)) {
-            foreach(array_keys($elements) as $idx) {
-              $itemId = intval($elements[$idx]["text"]);
-              $refText = "#".$elements[$idx]["text"];
-              if ($itemId) {
-                $item = get_record_by_id('Item', $itemId);
-                $refTitle = metadata($item, array('Dublin Core', 'Title'), array('no_filter' => true));
-                $refText = ($refTitle ? __("Reference").": ".$refTitle : "#" . $itemId );
-              }
-              $elements[$idx]["refText"] = $refText;
-            }
+          $elementsFiltered = metadata(
+            $item,
+            array($elementSet, $elementTitle),
+            array('all' => true, 'no_filter' => false)
+          );
+
+          foreach(array_keys($elements) as $idx) {
+            $elements[$idx]["filtered"] = $elementsFiltered[$idx];
           }
           // echo "<pre>" . print_r($elements,true) . "</pre>"; die();
         }

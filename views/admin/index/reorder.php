@@ -18,10 +18,8 @@
 
     echo "<ul id='sortable'>";
     foreach($elements as $element) {
-      $hasRefText = isset($element["refText"]);
-      $elementText = ( $hasRefText ? $element["refText"] : $element["text"] );
       echo "<li class='ui-state-default dragitems' data-id='".$element["id"]."'>".
-            $elementText.
+            $element["filtered"].
             "</li>";
     }
     echo "</ul>";

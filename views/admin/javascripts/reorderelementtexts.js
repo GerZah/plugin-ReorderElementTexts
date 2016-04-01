@@ -24,10 +24,6 @@ jQuery(document).bind("omeka:elementformload", function() {
 				var rawID = $(button).attr("id");
 				var elementId = rawID.substr( rawID.lastIndexOf("_")+1 );
 
-				// var reorderElementTestsButton = "Reorder Inputs";
-
-				console.log(itemId + " / " + elementId);
-				// $(div).append(itemId + " / " + elementId);
 				$(div).append("<a href="+reorderElementTextsUrl+"?item="+itemId+"&element="+elementId+
 												" class='blue button'>"+reorderElementTestsButton+
 												"</a>");
